@@ -1,6 +1,6 @@
 {
   "name": "type-graphql-orm",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Opinionated helper library set of decorator derivered from `type-graphql` and `typeorm`.",
   "main": "index.js",
   "scripts": {},
