@@ -1,0 +1,23 @@
+{
+  "name": "type-graphql-orm",
+  "version": "0.0.1",
+  "description": "Opinionated helper library set of decorator derivered from `type-graphql` and `typeorm`.",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jas99/type-graphql-orm"
+  },
+  "keywords": [
+    "graphql",
+    "type-graphql",
+    "typeorm",
+    "database"
+  ],
+  "author": "Jaspreet Singh <dev@jas.bio>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jas99/type-graphql-orm/issues"
+  },
+  "homepage": "https://github.com/jas99/type-graphql-orm#readme"
+}
