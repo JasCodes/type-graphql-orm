@@ -36,6 +36,7 @@
     "typescript": "^2.9.2"
   },
   "dependencies": {
+    "type-graphql": "^0.12.1",
     "typeorm": "^0.2.7"
   }
 }
