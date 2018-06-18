@@ -9,9 +9,9 @@
     "build": "tsc",
     "patch": "npm version patch",
     "whoami": "npm whoami",
-    "publish": "npm publish",
+    "pub": "npm publish",
     "push-tag": "git push origin master --tags",
-    "push": "run-s clean build patch whoami publish push-tag"
+    "push": "run-s clean build patch whoami pub push-tag"
   },
   "repository": {
     "type": "git",
