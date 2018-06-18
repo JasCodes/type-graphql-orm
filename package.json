@@ -2,8 +2,17 @@
   "name": "type-graphql-orm",
   "version": "0.0.2",
   "description": "Opinionated helper library set of decorator derivered from `type-graphql` and `typeorm`.",
-  "main": "index.js",
-  "scripts": {},
+  "main": ".dist/index.js",
+  "types": ".dist/index.d.ts",
+  "scripts": {
+    "clean": "rimraf .dist",
+    "build": "tsc",
+    "patch": "npm version patch",
+    "whoami": "npm whoami",
+    "publish": "npm publish",
+    "push-tag": "git push origin master --tags",
+    "push": "run-s clean build patch whoami publish push-tag"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/jas99/type-graphql-orm"
@@ -19,5 +28,10 @@
   "bugs": {
     "url": "https://github.com/jas99/type-graphql-orm/issues"
   },
-  "homepage": "https://github.com/jas99/type-graphql-orm#readme"
+  "homepage": "https://github.com/jas99/type-graphql-orm#readme",
+  "devDependencies": {
+    "npm-run-all": "^4.1.3",
+    "rimraf": "^2.6.2",
+    "typescript": "^2.9.2"
+  }
 }
