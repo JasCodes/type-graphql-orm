@@ -1,14 +1,16 @@
-const TypeORM = require('typeorm');
-const TypeGQL = require('type-graphql');
+// const TypeORM = require('typeorm');
+// const TypeGQL = require('type-graphql');
+
+import * as TypeORM from 'typeorm';
+import * as TypeGQL from 'type-graphql';
+
 export { TypeORM, TypeGQL };
+
 
 import { ReturnTypeFunc, AdvancedOptions, TypeValue } from 'type-graphql/decorators/types';
 
+import { RelationOptions, ObjectType } from "typeorm";
 
-
-// const { ReturnTypeFunc, AdvancedOptions, TypeValue };
-
-// const { ReturnTypeFunc, AdvancedOptions, TypeValue } = require('type-graphql/decorators/types')
 
 export function Field(returnTypeFunc?: ReturnTypeFunc, options?: AdvancedOptions): PropertyDecorator
 {
@@ -19,17 +21,17 @@ export function Field(returnTypeFunc?: ReturnTypeFunc, options?: AdvancedOptions
     };
 }
 
-// export function FieldOneToMany<T>(
-//     typeFunction: (type?: any) => TORM.ObjectType<T>,
-//     inverseSide: string | ((object: T) => any),
-//     options?: Relation | AdvancedOptions
-// ): PropertyDecorator
-// {
-//     options = { nullable: true, ...(options) };
-//     return (target, propertyKey) =>
-//     {
-//         TGQL.Field(typeFunction, options as AdvancedOptions)
-//             (target, propertyKey);
-//         TORM.OneToMany(typeFunction, inverseSide, options as RelationOption);
-//     };
-// }
+export function FieldOneToMany<T>(
+    typeFunction: (type?: any) => ObjectType<T>,
+    inverseSide: string | ((object: T) => any),
+    options?: RelationOptions | AdvancedOptions
+): PropertyDecorator
+{
+    options = { nullable: true, ...(options) };
+    return (target, propertyKey) =>
+    {
+        TypeGQL.Field(typeFunction, options as AdvancedOptions)
+            (target, propertyKey);
+        TypeORM.OneToMany(typeFunction, inverseSide, options as RelationOptions);
+    };
+}
