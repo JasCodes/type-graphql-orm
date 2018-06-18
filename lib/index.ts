@@ -1,3 +1,3 @@
-import TypeORM from 'typeorm';
-import TypeGQL from 'type-graphql';
+const TypeORM = require('typeorm');
+const TypeGQL = require('type-graphql');
 export { TypeORM, TypeGQL };
