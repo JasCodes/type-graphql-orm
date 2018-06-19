@@ -1,7 +1,7 @@
-import * as TypeORM from 'typeorm';
-import * as TypeGQL from 'type-graphql';
+import * as TypeOrm from 'typeorm';
+import * as TypeGql from 'type-graphql';
 
-export { TypeORM, TypeGQL };
+export { TypeOrm, TypeGql };
 
 import { ReturnTypeFunc, AdvancedOptions, TypeValue } from 'type-graphql/decorators/types';
 import { RelationOptions, ObjectType, EntityOptions } from "typeorm";
@@ -13,9 +13,9 @@ export function GqlClass(name?: string, options?: GqlClassOptions): ClassDecorat
     return (target) =>
     {
         name ?
-            TypeGQL.ObjectType(name, options as ObjectOptions) :
-            TypeGQL.ObjectType(options as ObjectOptions);
-        TypeORM.Entity(name, options as EntityOptions)
+            TypeGql.ObjectType(name, options as ObjectOptions)(target) :
+            TypeGql.ObjectType(options as ObjectOptions)(target);
+        TypeOrm.Entity(name, options as EntityOptions)(target)
     }
 }
 
@@ -24,7 +24,7 @@ export function GqlProp(returnTypeFunc?: ReturnTypeFunc, options?: AdvancedOptio
     options = { nullable: true, ...options }
     return (target, propertyKey) =>
     {
-        TypeGQL.Field(returnTypeFunc, <AdvancedOptions>options)(target, propertyKey);
+        TypeGql.Field(returnTypeFunc, <AdvancedOptions>options)(target, propertyKey);
     };
 }
 
@@ -40,8 +40,10 @@ export function GqlPropOneToOne<T>(
     options = { nullable: true, ...(options) };
     return (target, propertyKey) =>
     {
-        TypeGQL.Field(typeFunction, options as AdvancedOptions)(target, propertyKey);
-        TypeORM.OneToOne(typeFunction, inverseSide, options as RelationOptions)(target, propertyKey);
+        TypeGql.Field(typeFunction, options as AdvancedOptions)
+        (target, propertyKey);
+        TypeOrm.OneToOne(typeFunction, inverseSide, options as RelationOptions)
+        (target, propertyKey);
     };
 }
 
@@ -54,9 +56,9 @@ export function GqlPropOneToMany<T>(
     options = { nullable: true, ...(options) };
     return (target, propertyKey) =>
     {
-        TypeGQL.Field(type => [typeFunction()], options as AdvancedOptions)
+        TypeGql.Field(type => [typeFunction()], options as AdvancedOptions)
             (target, propertyKey);
-        TypeORM.OneToMany(typeFunction, inverseSide, options as RelationOptions)
+        TypeOrm.OneToMany(typeFunction, inverseSide, options as RelationOptions)
             (target, propertyKey);
     };
 }
@@ -71,9 +73,9 @@ export function GqlPropManyToMany<T>(
     options = { nullable: true, ...(options) };
     return (target, propertyKey) =>
     {
-        TypeGQL.Field(type => [typeFunction()], options as AdvancedOptions)
+        TypeGql.Field(type => [typeFunction()], options as AdvancedOptions)
             (target, propertyKey);
-        TypeORM.ManyToMany(typeFunction, inverseSide, options as RelationOptions)
+        TypeOrm.ManyToMany(typeFunction, inverseSide, options as RelationOptions)
             (target, propertyKey);
     };
 }
