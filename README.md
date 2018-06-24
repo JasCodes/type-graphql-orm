@@ -1,6 +1,6 @@
 # type-graphql-orm
 
-> **Warning: Under Development**
+> **Warning: Abandoned**
 
 Opinionated helper library set of decorator derivered from `type-graphql` and `typeorm`.
 
